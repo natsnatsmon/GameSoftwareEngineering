@@ -70,13 +70,15 @@ void Object::SetCoefFric(float m) {
 	m_coefFric = m;
 }
 
-void Object::GetPosition(float * x, float * y) { 
+void Object::GetPosition(float * x, float * y, float* z) { 
 	*x = m_posX;
 	*y = m_posY;
+	*z = m_posZ;
 }
-void Object::SetPosition(float x, float y) { 
+void Object::SetPosition(float x, float y, float z) { 
 	m_posX = x;
 	m_posY = y;
+	m_posZ = z;
 }
 
 void Object::GetVel(float * x, float * y) {

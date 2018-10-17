@@ -16,6 +16,7 @@ public:
 	bool IsInitialized();
 	void DrawSolidRect(float x, float y, float z, float sizeX, float sizeY, float r, float g, float b, float a);
 	void DrawTextureRect(float x, float y, float z, float sizeX, float sizeY, float r, float g, float b, float a, GLuint texID);
+	void DrawTextureRectHeight(float x, float y, float z, float sizeX, float sizeY, float r, float g, float b, float a, GLuint texID, float height);
 	GLuint CreatePngTexture(char * filePath);
 	void DeleteTexture(GLuint texID);
 
@@ -26,11 +27,14 @@ private:
 	GLuint CompileShaders(char* filenameVS, char* filenameFS);
 	void CreateVertexBufferObjects();
 	void GetGLPosition(float x, float y, float *newX, float *newY);
+	void GetGLShadow(float x, float *newV);
 
 	bool m_Initialized = false;
 	
 	unsigned int m_WindowSizeX = 0;
 	unsigned int m_WindowSizeY = 0;
+
+	GLuint m_TexShadow = 0;
 
 	GLuint m_VBORect = 0;
 	GLuint m_SolidRectShader = 0;

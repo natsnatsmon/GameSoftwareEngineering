@@ -4,6 +4,7 @@ class Object
 private:
 	float m_posX;
 	float m_posY;
+	float m_posZ;
 	float m_sizeX, m_sizeY;
 	float m_R, m_G, m_B, m_A;
 	float m_velX;
@@ -20,8 +21,8 @@ public:
 	void Update(float eTime);
 
 
-	void GetPosition(float* x, float* y);
-	void SetPosition(float x, float y);
+	void GetPosition(float* x, float* y, float* z);
+	void SetPosition(float x, float y, float z);
 	
 	void GetVel(float* x, float* y);
 	void SetVel(float x, float y);

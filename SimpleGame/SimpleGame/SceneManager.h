@@ -9,6 +9,7 @@ private:
 	Renderer *m_Renderer;
 	Object *m_TestObj;
 	GLuint m_TestTexture = 0;
+	GLuint m_ShadowTexture = 0;
 
 public:
 	SceneManager();
