@@ -17,6 +17,7 @@ public:
 	void DrawSolidRect(float x, float y, float z, float sizeX, float sizeY, float r, float g, float b, float a);
 	void DrawTextureRect(float x, float y, float z, float sizeX, float sizeY, float r, float g, float b, float a, GLuint texID);
 	void DrawTextureRectHeight(float x, float y, float z, float sizeX, float sizeY, float r, float g, float b, float a, GLuint texID, float height);
+	void Renderer::DrawTextureRectSeqXY(float x, float y, float z, float sizeX, float sizeY, float r, float g, float b, float a, GLuint texID, int currSeqX, int currSeqY, int totalSeqX, int totalSeqY);
 	GLuint CreatePngTexture(char * filePath);
 	void DeleteTexture(GLuint texID);
 
@@ -41,5 +42,7 @@ private:
 
 	GLuint m_VBOTexRect = 0;
 	GLuint m_TextureRectShader = 0;
+
+	GLuint m_TextureRectSeqShader = 0;
 };
 

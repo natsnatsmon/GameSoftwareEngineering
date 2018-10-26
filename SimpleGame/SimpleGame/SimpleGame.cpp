@@ -15,7 +15,7 @@ but WITHOUT ANY WARRANTY.
 #include "Dependencies\glew.h"
 #include "Dependencies\freeglut.h"
 #include "SceneManager.h"
-
+#include "Global.h"
 using namespace std;
 
 SceneManager *g_scgMgr = NULL;
@@ -28,6 +28,9 @@ BOOL g_keyW = false;
 BOOL g_keyA = false;
 BOOL g_keyS = false;
 BOOL g_keyD = false;
+
+int g_shoot = SHOOT_NONE;
+
 
 void RenderScene(void)
 {
@@ -55,7 +58,7 @@ void RenderScene(void)
 	// update
 	g_scgMgr->Update(eTime);
 	g_scgMgr->RenderScene();
-
+	g_scgMgr->Shoot();
 	glutSwapBuffers();
 }
 
@@ -106,9 +109,25 @@ void KeyUpInput(unsigned char key, int x, int y) {
 	}
 }
 
-void SpecialKeyInput(int key, int x, int y)
-{
-	RenderScene();
+void SpecialKeyUpInput(int key, int x, int y) {
+	g_shoot = SHOOT_NONE;
+}
+
+void SpecialKeyDownInput(int key, int x, int y) {
+	switch (key) {
+	case GLUT_KEY_UP:
+		g_shoot = SHOOT_UP;
+		break;
+	case GLUT_KEY_DOWN:
+		g_shoot = SHOOT_DOWN;
+		break;
+	case GLUT_KEY_LEFT:
+		g_shoot = SHOOT_LEFT;
+		break;
+	case GLUT_KEY_RIGHT:
+		g_shoot = SHOOT_RIGHT;
+		break;
+	}
 }
 
 int main(int argc, char **argv)

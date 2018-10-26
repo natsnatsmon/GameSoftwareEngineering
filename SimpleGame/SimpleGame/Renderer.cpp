@@ -34,6 +34,7 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 	//Load shaders
 	m_SolidRectShader = CompileShaders("./Shaders/SolidRect.vs", "./Shaders/SolidRect.fs");
 	m_TextureRectShader = CompileShaders("./Shaders/TextureRect.vs", "./Shaders/TextureRect.fs");
+	m_TextureRectSeqShader = CompileShaders("./Shaders/TextureRectSeq.vs", "./Shaders/TextureRectSeq.fs");
 
 	//Load shadow texture
 	m_TexShadow = CreatePngTexture("./shadow.png");
@@ -328,4 +329,58 @@ void Renderer::DrawTextureRectHeight(float x, float y, float z, float sizeX, flo
 	glDisableVertexAttribArray(attribTexture);
 
 	glDisable(GL_BLEND);
+}
+
+void Renderer::DrawTextureRectSeqXY(float x, float y, float z, float sx, float sy, float r, float g, float b, float a, GLuint texID, int currSeqX, int currSeqY, int totalSeqX, int totalSeqY)
+{
+	GLuint tID = texID;
+
+	float newX, newY;
+
+	GetGLPosition(x, y, &newX, &newY);
+
+	GLuint shader = m_TextureRectSeqShader;
+
+	//Program select
+	glUseProgram(shader);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+
+	GLuint u_Trans = glGetUniformLocation(shader, "u_Trans");
+	GLuint u_Color = glGetUniformLocation(shader, "u_Color");
+	GLuint u_TotalSeqX = glGetUniformLocation(shader, "u_TotalSeqX");
+	GLuint u_TotalSeqY = glGetUniformLocation(shader, "u_TotalSeqY");
+	GLuint u_CurrSeqX = glGetUniformLocation(shader, "u_CurrSeqX");
+	GLuint u_CurrSeqY = glGetUniformLocation(shader, "u_CurrSeqY");
+	glUniform1f(glGetUniformLocation(shader, "u_Depth"), 0.5f);
+
+	glUniform4f(u_Trans, newX, newY, sx, sy);
+	glUniform4f(u_Color, r, g, b, a);
+	glUniform1f(u_TotalSeqX, (float)totalSeqX);
+	glUniform1f(u_CurrSeqX, (float)currSeqX);
+	glUniform1f(u_TotalSeqY, (float)totalSeqY);
+	glUniform1f(u_CurrSeqY, (float)currSeqY);
+
+	GLuint attribPosition = glGetAttribLocation(shader, "a_Position");
+	GLuint attribTexPosition = glGetAttribLocation(shader, "a_TexPosition");
+	glEnableVertexAttribArray(attribPosition);
+	glEnableVertexAttribArray(attribTexPosition);
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOTexRect);
+	glVertexAttribPointer(attribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0);
+	glVertexAttribPointer(attribTexPosition, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (GLvoid*)(sizeof(float) * 3));
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, tID);
+	GLuint u_Texture = glGetUniformLocation(shader, "u_Texture");
+	glUniform1i(u_Texture, 0);
+
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+
+	glDisableVertexAttribArray(attribPosition);
+	glDisableVertexAttribArray(attribTexPosition);
 }

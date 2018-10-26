@@ -13,12 +13,17 @@ private:
 	float m_accY;
 	float m_mass;
 	float m_coefFric;
+	
+	int m_kind;
 
 public:
 	Object();
 	~Object();
 
 	void Update(float eTime);
+
+	void GetKind(int* kind);
+	void SetKind(int kind);
 
 
 	void GetPosition(float* x, float* y, float* z);

@@ -56,6 +56,14 @@ void Object::Update(float eTime) {
 	m_posY = m_posY + m_velY * eTime;
 }
 
+void Object::GetKind(int * kind) {
+	*kind = m_kind;
+}
+void Object::SetKind(int kind) {
+	m_kind = kind;
+}
+
+
 void Object::GetMass(float * m) {
 	*m = m_mass;
 }

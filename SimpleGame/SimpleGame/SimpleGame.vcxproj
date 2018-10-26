@@ -156,6 +156,7 @@
     <Text Include="Text.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Global.h" />
     <ClInclude Include="LoadPng.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Renderer.h" />
@@ -181,6 +182,8 @@
     <None Include="Shaders\SolidRect.vs" />
     <None Include="Shaders\TextureRect.fs" />
     <None Include="Shaders\TextureRect.vs" />
+    <None Include="Shaders\TextureRectSeq.fs" />
+    <None Include="Shaders\TextureRectSeq.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
