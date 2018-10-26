@@ -31,7 +31,6 @@ BOOL g_keyD = false;
 
 int g_shoot = SHOOT_NONE;
 
-
 void RenderScene(void)
 {
 	// Calc Elapsed Time
@@ -58,7 +57,7 @@ void RenderScene(void)
 	// update
 	g_scgMgr->Update(eTime);
 	g_scgMgr->RenderScene();
-	g_scgMgr->Shoot();
+	g_scgMgr->Shoot(g_shoot);
 	glutSwapBuffers();
 }
 
@@ -156,7 +155,8 @@ int main(int argc, char **argv)
 	glutKeyboardFunc(KeyDownInput);
 	glutKeyboardUpFunc(KeyUpInput);
 	glutMouseFunc(MouseInput);
-	glutSpecialFunc(SpecialKeyInput);
+	glutSpecialFunc(SpecialKeyDownInput);
+	glutSpecialFunc(SpecialKeyUpInput);
 
 	// init SceneManager
 	g_scgMgr = new SceneManager;

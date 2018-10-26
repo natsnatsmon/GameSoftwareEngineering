@@ -18,7 +18,7 @@ SceneManager::SceneManager()
 	// Load Texture
 	m_TestTexture = m_Renderer->CreatePngTexture("player.png");
 	m_ShadowTexture = m_Renderer->CreatePngTexture("shadow.png");
-	m_BulletTexture = m_Renderer->CreatePngTexture("bullet.png");
+	//m_BulletTexture = m_Renderer->CreatePngTexture("bullet.png");
 
 	for (int i = 0; i < MAX_OBJECTS; ++i) {
 		m_Objects[i] = NULL;
@@ -46,13 +46,15 @@ SceneManager::~SceneManager()
 		m_Renderer = NULL;
 	}
 
-	if (m_TestObj) {	
-		delete m_TestObj;	
-		m_TestObj = NULL;
+	if (m_Objects) {	
+		delete m_Objects;	
+		for (int i = 0; i < MAX_OBJECTS; ++i) {
+			m_Objects[i] = NULL;
+		}
 	}
 }
 
-void Shoot(int shootID) {
+void SceneManager::Shoot(int shootID) {
 	if (shootID == SHOOT_NONE) {
 		return;
 	}
@@ -85,7 +87,7 @@ void Shoot(int shootID) {
 
 	float pX, pY, pZ;
 	m_Objects[HERO_ID]->GetPosition(&pX, &pY, &pZ);
-	float vX, vY, ;
+	float vX, vY;
 	m_Objects[HERO_ID]->GetVel(&vX, &vY);
 }
 
@@ -103,9 +105,9 @@ void SceneManager::RenderScene() {
 	g_seq++;
 	if (g_seq > 3) // 스프라이트 (가로 * 세로 - 1)
 		g_seq = 0;
-	m_TestObj->GetPosition(&x, &y, &z);
-	m_TestObj->GetSize(&sizeX, &sizeY);
-	m_TestObj->GetColor(&r, &g, &b, &a);
+	m_Objects[HERO_ID]->GetPosition(&x, &y, &z);
+	m_Objects[HERO_ID]->GetSize(&sizeX, &sizeY);
+	m_Objects[HERO_ID]->GetColor(&r, &g, &b, &a);
 	
 //	m_Renderer->DrawTextureRect(x * 100.f, y * 100.f, 0, sizeX * 100.f, sizeY * 100.f, r, g, b, a, m_TestTexture);
 	m_Renderer->DrawTextureRectHeight(x * 100.f, y * 100.f, 0, sizeX * 100.f, sizeY * 100.f, r, g, b, a, m_ShadowTexture, z);
@@ -114,7 +116,9 @@ void SceneManager::RenderScene() {
 }
 
 void SceneManager::Update(float eTime) {
-	m_TestObj->Update(eTime);
+	for (int i = 0; i < MAX_OBJECTS; ++i) {
+		m_Objects[i]->Update(eTime);
+	}
 }
 
 void SceneManager::InputKey(int key) {
@@ -122,6 +126,9 @@ void SceneManager::InputKey(int key) {
 }
 
 void SceneManager::ApplyForce(float forceX, float forceY, float eTime) {
-	m_TestObj->ApplyForce(forceX, forceY, eTime);
+	
+	for (int i = 0; i < MAX_OBJECTS; ++i) {
+		m_Objects[i]->ApplyForce(forceX, forceY, eTime);
+	}
 
 }
