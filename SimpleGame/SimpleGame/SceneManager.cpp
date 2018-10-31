@@ -116,9 +116,11 @@ void SceneManager::RenderScene() {
 }
 
 void SceneManager::Update(float eTime) {
-	for (int i = 0; i < MAX_OBJECTS; ++i) {
-		m_Objects[i]->Update(eTime);
-	}
+	m_Objects[0]->Update(eTime);
+
+	//for (int i = 0; i < MAX_OBJECTS; ++i) {
+	//	m_Objects[i]->Update(eTime);
+	//}
 }
 
 void SceneManager::InputKey(int key) {
@@ -126,9 +128,10 @@ void SceneManager::InputKey(int key) {
 }
 
 void SceneManager::ApplyForce(float forceX, float forceY, float eTime) {
+	m_Objects[0]->ApplyForce(forceX, forceY, eTime);
 	
-	for (int i = 0; i < MAX_OBJECTS; ++i) {
-		m_Objects[i]->ApplyForce(forceX, forceY, eTime);
-	}
+//	for (int i = 0; i < MAX_OBJECTS; ++i) {
+//		m_Objects[i]->ApplyForce(forceX, forceY, eTime);
+//	}
 
 }
