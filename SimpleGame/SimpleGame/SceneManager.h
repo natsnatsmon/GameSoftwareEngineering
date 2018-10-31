@@ -27,4 +27,12 @@ public:
 	void ApplyForce(float forceX, float forceY, float eTime);
 
 	void Shoot(int shootID);
+
+	void AddObject(float x, float y, float z,
+		float sx, float sy, float vx, float vy);
+	
+	int FindEmptyObjectSlot();
+
+	void DeleteObject(int id);
+
 };
