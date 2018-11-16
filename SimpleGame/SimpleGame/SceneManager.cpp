@@ -16,7 +16,7 @@ SceneManager::SceneManager()
 	}
 
 	// Load Texture
-	m_TestTexture = m_Renderer->CreatePngTexture("player.png");
+	m_TestTexture = m_Renderer->CreatePngTexture("p1_sprite.png");
 	m_ShadowTexture = m_Renderer->CreatePngTexture("shadow.png");
 	//m_BulletTexture = m_Renderer->CreatePngTexture("bullet.png");
 
@@ -26,15 +26,17 @@ SceneManager::SceneManager()
 
 	// Init Test Obj
 	m_Objects[HERO_ID] = new Object();
-	m_Objects[HERO_ID]->SetPosition(0.f, 0.f, 5.f);
+	m_Objects[HERO_ID]->SetPosition(0.f, 0.f, 0.5f);
 	m_Objects[HERO_ID]->SetVel(0.0f, 0.0f);
 	m_Objects[HERO_ID]->SetAcc(0.f, 0.f);
-	m_Objects[HERO_ID]->SetSize(0.75f, 0.5f);
+	m_Objects[HERO_ID]->SetSize(0.5f, 0.5f);
 	m_Objects[HERO_ID]->SetMass(1.f);
 	m_Objects[HERO_ID]->SetCoefFric(0.01f);
 	m_Objects[HERO_ID]->SetColor(1.f, 1.f, 1.f, 1.f);
 	m_Objects[HERO_ID]->SetKind(KIND_HERO);
 
+	AddObject(1.f, 0.f, 1.f, 1.f, 1.f, 0.f, 0.f);
+	//AddObject(-1.1f, 0.f, 1.f, 1.f, 1.f, 0.f, 0.f);
 }
 
 
@@ -145,17 +147,17 @@ void SceneManager::AddObject(float x, float y, float z, float sx, float sy, floa
 		return;
 	}
 
-	m_Objects[id] = new Object();
+//	m_Objects[id] = new Object();
 
-	m_Objects[HERO_ID] = new Object();
-	m_Objects[HERO_ID]->SetPosition(x, y, z);
-	m_Objects[HERO_ID]->SetVel(vx, vy);
-	m_Objects[HERO_ID]->SetAcc(0.f, 0.f);
-	m_Objects[HERO_ID]->SetSize(sx, sy);
-	m_Objects[HERO_ID]->SetMass(1.f);
-	m_Objects[HERO_ID]->SetCoefFric(0.01f);
-	m_Objects[HERO_ID]->SetColor(1.f, 1.f, 1.f, 1.f);
-	m_Objects[HERO_ID]->SetKind(KIND_BULLET);
+	m_Objects[id] = new Object();
+	m_Objects[id]->SetPosition(x, y, z);
+	m_Objects[id]->SetVel(vx, vy);
+	m_Objects[id]->SetAcc(0.f, 0.f);
+	m_Objects[id]->SetSize(sx, sy);
+	m_Objects[id]->SetMass(1.f);
+	m_Objects[id]->SetCoefFric(0.01f);
+	m_Objects[id]->SetColor(1.f, 1.f, 1.f, 1.f);
+	m_Objects[id]->SetKind(KIND_BULLET);
 
 }
 

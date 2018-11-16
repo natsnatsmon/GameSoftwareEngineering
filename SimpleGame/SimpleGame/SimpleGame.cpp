@@ -44,7 +44,7 @@ void RenderScene(void)
 	float eTime = (float)elapsedTime / 1000.f;
 
 	//cout << "elapsedTime : " << eTime << endl;
-	cout << "W :" << g_keyW << ", A :" << g_keyA << ", S :" << g_keyS << ", D :" << g_keyD << endl;
+//	cout << "W :" << g_keyW << ", A :" << g_keyA << ", S :" << g_keyS << ", D :" << g_keyD << endl;
 
 	float forceX = 0.f;
 	float forceY = 0.f;
@@ -88,6 +88,7 @@ void KeyDownInput(unsigned char key, int x, int y)
 		g_keyW = TRUE;
 		break;
 	}
+	printf("dd\n");
 }
 
 // 키보드가 떨어졌을 때 발생하는 이벤트

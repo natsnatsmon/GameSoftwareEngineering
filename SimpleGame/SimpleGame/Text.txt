@@ -160,3 +160,15 @@ m_Objrects[MAX_OBJECTS] : array 생성 후 관리
 빈 슬롯 찾는 함수 필요 : FindEmptySlot
 
 간단한 AddObject(x, y, z, sx, sy, vx, vy), DeleteObject(id) 구현
+
+
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+1116
+
+Shoot 완성
+
+Collision test api 추가 (axis aligned rectangle 가정)
+
+간단한 Collision 테크 해주기
